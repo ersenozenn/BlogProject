@@ -1,4 +1,5 @@
-﻿using BlogProject.MODEL.Entities;
+﻿using BlogProject.CORE.Entity;
+using BlogProject.MODEL.Entities;
 using BlogProject.MODEL.Maps;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -31,8 +32,39 @@ namespace BlogProject.MODEL.Context
         //}
         public DbSet<Category>Categories { get; set; }
         public DbSet<Post> Posts { get; set; }  
-        public DbSet<User> Users { get; set; }  
-                
+        public DbSet<User> Users { get; set; }
+
+        public override int SaveChanges()
+        {
+            var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified || x.State == EntityState.Added).ToList();
+            return base.SaveChanges();
+            string computerName = Environment.MachineName;
+            string ipAddress = "127.0.0.1";
+            DateTime date = DateTime.Now;
+
+            foreach (var item in modifiedEntries)
+            {
+                CoreEntity entity = item.Entity as CoreEntity;
+
+                if (item!=null)
+                {
+                    switch (item.State)
+                    {                       
+                        case EntityState.Modified:
+                            entity.UpdatedComputerName = computerName;
+                            entity.UpdatedIP = ipAddress;
+                            entity.UpdatedDate = date;
+                            break;
+                        case EntityState.Added:
+                            entity.CreatedIP = ipAddress;
+                            entity.CreatedComputerName = computerName;
+                            entity.CreatedDate = date;
+                            break;
+                    }
+                }
+            }
+        }
+
 
     }
 }
