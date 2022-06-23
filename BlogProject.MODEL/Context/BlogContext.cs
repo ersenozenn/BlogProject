@@ -37,7 +37,7 @@ namespace BlogProject.MODEL.Context
         public override int SaveChanges()
         {
             var modifiedEntries = ChangeTracker.Entries().Where(x => x.State == EntityState.Modified || x.State == EntityState.Added).ToList();
-            return base.SaveChanges();
+            
             string computerName = Environment.MachineName;
             string ipAddress = "127.0.0.1";
             DateTime date = DateTime.Now;
@@ -63,8 +63,10 @@ namespace BlogProject.MODEL.Context
                     }
                 }
             }
+            //Do not delete.
+            return base.SaveChanges();
         }
 
-
+        
     }
 }
