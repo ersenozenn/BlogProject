@@ -37,13 +37,7 @@ namespace BlogProject.UI.Controllers
             
             return View(postUserVM);
         }
-        public IActionResult PostByID(Guid id)
-        {
-            SinglePostVM singlePost = new SinglePostVM();
-            singlePost.Post = ps.GetByID(id);
-            singlePost.User = us.GetbyDefault(x=>x.ID== singlePost.Post.UserID);
-            return View(singlePost);
-        }
+        
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
