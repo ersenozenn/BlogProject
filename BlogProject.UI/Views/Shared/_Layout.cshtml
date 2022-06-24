@@ -24,12 +24,12 @@
             </button>
             <div class="tm-site-header">
                 <div class="mb-3 mx-auto tm-site-logo"><i class="fas fa-times fa-2x"></i></div>
-                <h1 class="text-center">Xtra Blog</h1>
+                <h1 class="text-center">BuDaBi Blog</h1>
             </div>
             <nav class="tm-nav" id="tm-nav">
                 <ul>
                     <li class="tm-nav-item active">
-                        <a href="index.html" class="tm-nav-link">
+                        <a asp-controller="Home" asp-action="Index" class="tm-nav-link">
                             <i class="fas fa-home"></i>
                             Blog Home
                         </a>
@@ -46,13 +46,13 @@
                     <li class="tm-nav-item">
                         <a href="about.html" class="tm-nav-link">
                             <i class="fas fa-users"></i>
-                            About Xtra
+                            Hakkında
                         </a>
                     </li>
                     <li class="tm-nav-item">
                         <a href="contact.html" class="tm-nav-link">
                             <i class="far fa-comments"></i>
-                            Contact Us
+                            İletişim
                         </a>
                     </li>
                 </ul>
@@ -82,7 +82,7 @@
             <div class="row tm-row">
                 <div class="col-12">
                     <form method="GET" class="form-inline tm-mb-80 tm-search-form">
-                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Search..." aria-label="Search">
+                        <input class="form-control tm-search-input" name="query" type="text" placeholder="Ara" aria-label="Search">
                         <button class="tm-search-button" type="submit">
                             <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
                         </button>
