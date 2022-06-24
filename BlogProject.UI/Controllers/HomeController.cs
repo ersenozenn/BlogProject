@@ -37,10 +37,12 @@ namespace BlogProject.UI.Controllers
             
             return View(postUserVM);
         }
-
-        public IActionResult Privacy()
+        public IActionResult PostByID(Guid id)
         {
-            return View();
+            SinglePostVM singlePost = new SinglePostVM();
+            singlePost.Post = ps.GetByID(id);
+            singlePost.User = us.GetbyDefault(x=>x.ID== singlePost.Post.UserID);
+            return View(singlePost);
         }
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
