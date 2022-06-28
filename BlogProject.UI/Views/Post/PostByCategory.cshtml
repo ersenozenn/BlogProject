@@ -1,10 +1,8 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿@model PostUserVM
+
+@{
+    ViewData["Title"] = "PostByCategory";
 }
-
-@model PostUserVM
-
-
 @foreach (var item in Model.Posts)
 {
     <article class="col-12 col-md-6 tm-post">
@@ -13,11 +11,7 @@
             <div class="tm-post-link-inner">
                 <img src="~/@item.ImagePath" alt="Image" class="img-fluid" >
             </div>
-            @if (item.CreatedDate.Value.CompareTo(DateTime.Now.AddDays(-5))>0)
-            {
-                <span class="position-absolute tm-new-badge">Yeni</span>
-            }
-            
+            <span class="position-absolute tm-new-badge">New</span>
             <h2 class="tm-pt-30 tm-color-primary tm-post-title">@item.Title</h2>
         </a>
         <p class="tm-pt-30">
@@ -41,6 +35,7 @@
         </div>
     </article>
 }
+
 
 
 

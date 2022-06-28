@@ -35,7 +35,7 @@
                         </a>
                     </li>
                     <li class="tm-nav-item">
-                        <a href="post.html" class="tm-nav-link">
+                        <a asp-controller="Category" asp-action="Index" class="tm-nav-link">
                             <i class="fas fa-pen"></i>
                             Kategoriler 
                         </a>
@@ -81,7 +81,7 @@
             <!-- Search form -->
             <div class="row tm-row">
                 <div class="col-12">
-                    <form method="GET" class="form-inline tm-mb-80 tm-search-form">
+                    <form asp-controller="Post" asp-action="PostBySearch"  method="post" asp class="form-inline tm-mb-80 tm-search-form">
                         <input class="form-control tm-search-input" name="query" type="text" placeholder="Ara" aria-label="Search">
                         <button class="tm-search-button" type="submit">
                             <i class="fas fa-search tm-search-icon" aria-hidden="true"></i>
