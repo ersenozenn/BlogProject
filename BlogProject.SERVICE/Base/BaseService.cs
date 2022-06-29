@@ -63,7 +63,7 @@ namespace BlogProject.SERVICE.Base
         //}
         public bool Any(Expression<Func<T, bool>> exp)=>context.Set<T>().Any(exp);
 
-        public List<T> GetActive()=>context.Set<T>().Where(x=>x.Status!=Status.Deleted).ToList();
+        public List<T> GetActive()=>context.Set<T>().Where(x=>x.Status==Status.Active || x.Status ==Status.Updated).ToList();
         
 
         public List<T> GetAll() => context.Set<T>().ToList();
