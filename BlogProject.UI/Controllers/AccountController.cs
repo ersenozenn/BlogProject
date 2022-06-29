@@ -45,5 +45,10 @@ namespace BlogProject.UI.Controllers
             }
                 return View(item);
         }
+        public async Task<IActionResult> LogOut()
+        {
+            await HttpContext.SignOutAsync();
+            return RedirectToAction("Index","Home");
+        }
     }
 }

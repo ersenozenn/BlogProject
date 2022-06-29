@@ -1,4 +1,6 @@
-﻿
+﻿@using Microsoft.AspNetCore.Http
+@using System.Security.Claims
+
 
 <!DOCTYPE html>
 <html>
@@ -136,12 +138,12 @@
             <div class="scrollbar-inner sidebar-wrapper">
                 <div class="user">
                     <div class="photo">
-                        <img src="assets/img/profile.jpg">
+                        <img src="~/@Context.User.FindFirst("Image").Value.ToString()">
                     </div>
                     <div class="info">
                         <a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
                             <span>
-                                Hizrian
+                                @Context.User.FindFirst(ClaimTypes.Name).Value @Context.User.FindFirst(ClaimTypes.Surname).Value;
                                 <span class="user-level">Administrator</span>
                                 <span class="caret"></span>
                             </span>
@@ -209,7 +211,7 @@
                         </a>
                     </li>
                     <li class="nav-item update-pro">
-                        <button data-toggle="modal" data-target="#modalUpdate">
+                        <button onclick="location.href='@Url.Action("LogOut", "Account", new { area = "" })'">
                             <i class="la la-hand-pointer-o"></i>
                             <p>Çıkış Yap</p>
                         </button>
