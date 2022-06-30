@@ -44,7 +44,7 @@ namespace BlogProject.UI.Areas.Admin.Controllers
                 eklenecekPost.ImagePath = gelenMakale["imagePath"];
                 eklenecekPost.ViewCount = Convert.ToInt32(gelenMakale["viewCount"]);
                 eklenecekPost.CategoryID = Guid.Parse(gelenMakale["categoryId"]);
-                eklenecekPost.UserID = Guid.Parse(gelenMakale["userId"]);
+                eklenecekPost.UserID = Guid.Parse(HttpContext.User.FindFirst("ID").Value);
 
                 ps.Add(eklenecekPost);
 

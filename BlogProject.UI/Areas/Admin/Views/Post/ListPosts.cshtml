@@ -9,15 +9,15 @@
 <p>
     <a asp-action="AddPost">Create New</a>
 </p>
-<table class="table">
+<table class="table" id="postTablosu">
     <thead>
         <tr>
             <th>
                 @Html.DisplayNameFor(model => model.Title)
-            </th>           
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.Tags)
-            </th>           
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.ViewCount)
             </th>
@@ -29,37 +29,69 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Status)
-            </th>            
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Title)
-            </td>           
-            <td>
-                @Html.DisplayFor(modelItem => item.Tags)
-            </td>          
-            <td>
-                @Html.DisplayFor(modelItem => item.ViewCount)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Category.CategoryName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.User.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>           
-            <td>
-                <a asp-action="EditPost" asp-route-id="@item.ID">Edit</a> |
-                <a asp-action="ActivatePost" asp-route-id="@item.ID">Activate</a> |
-                <a asp-action="DeletePost" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+        @*@foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Title)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Tags)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ViewCount)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Category.CategoryName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.User.EmailAddress)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Status)
+                </td>
+                <td>
+                    <a asp-action="EditPost" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-action="ActivatePost" asp-route-id="@item.ID">Activate</a> |
+                    <a asp-action="DeletePost" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }*@
     </tbody>
 </table>
+<script src="~/lib/jquery//dist/jquery.js"></script>
+
+<script>
+    $(document).ready(function() {
+        postlariGetir();
+    });
+    function postlariGetir() {
+        $.ajax({
+            method: "GET",
+            url: "https://localhost:44379/api/post/listposts",
+            data: {}
+        }).done(function(gelenData) {
+
+            var htmlVeri = null;
+            var tabloyuBul = $("#postTablosu").html();
+
+            var sayac = 0;
+            gelenData.forEach(function() {
+                htmlVeri +=
+                    '<tr><td>' + gelenData[sayac].Title + '</td><td>' + gelenData[sayac].Tags + '</td><td>' + gelenData[sayac].ViewCount + '</td><td>' + gelenData[sayac].CategoryID + '</td><td>' + gelenData[sayac].UserID + '</td><td>' + gelenData[sayac].UserID + '</td><td><a asp-action="EditPost" asp-route-id="' + gelenData[sayac].ID + '">Edit</a> |<a asp-action="ActivatePost" asp-route-id="' + gelenData[sayac].ID + '">Activate</a> |<a asp-action="DeletePost" asp-route-id="' + gelenData[sayac].ID + '">Delete</a></td></tr>'
+
+                sayac = sayac + 1;
+            });
+            $("#postTablosu tbody").html(htmlVeri);
+        });
+    };
+
+
+
+
+</script>
