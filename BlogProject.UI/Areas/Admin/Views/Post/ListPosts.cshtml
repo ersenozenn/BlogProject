@@ -64,12 +64,20 @@
         }*@
     </tbody>
 </table>
-<script src="~/lib/jquery//dist/jquery.js"></script>
+<script src="~/lib/jquery/dist/jquery.js"></script>
 
 <script>
     $(document).ready(function() {
         postlariGetir();
     });
+
+    function activatePost(id){
+        $.ajax({
+            method: "GET",
+            url: "https://localhost:44379/api/post/activatepost/",
+            data:id
+        })
+    }
     function postlariGetir() {
         $.ajax({
             method: "GET",
@@ -78,12 +86,12 @@
         }).done(function(gelenData) {
 
             var htmlVeri = null;
-            var tabloyuBul = $("#postTablosu").html();
+            //var tabloyuBul = $("#postTablosu").html();
 
             var sayac = 0;
             gelenData.forEach(function() {
                 htmlVeri +=
-                    '<tr><td>' + gelenData[sayac].Title + '</td><td>' + gelenData[sayac].Tags + '</td><td>' + gelenData[sayac].ViewCount + '</td><td>' + gelenData[sayac].CategoryID + '</td><td>' + gelenData[sayac].UserID + '</td><td>' + gelenData[sayac].UserID + '</td><td><a asp-action="EditPost" asp-route-id="' + gelenData[sayac].ID + '">Edit</a> |<a asp-action="ActivatePost" asp-route-id="' + gelenData[sayac].ID + '">Activate</a> |<a asp-action="DeletePost" asp-route-id="' + gelenData[sayac].ID + '">Delete</a></td></tr>'
+                    '<tr><td>' + gelenData[sayac].title + '</td><td>' + gelenData[sayac].tags + '</td><td>' + gelenData[sayac].viewCount + '</td><td>' + gelenData[sayac].categoryID + '</td><td>' + gelenData[sayac].userID + '</td><td>' + gelenData[sayac].status + '</td><td><a href="/Adminstrator/Post/UpdatePost/' + gelenData[sayac].id + '">Edit</a> |<a  href="https://localhost:44379/api/Post/ActivatePost/' + gelenData[sayac].id + '">Activate</a> |<a asp-action="DeletePost" asp-route-id="' + gelenData[sayac].id + '">Delete</a></td></tr>'
 
                 sayac = sayac + 1;
             });

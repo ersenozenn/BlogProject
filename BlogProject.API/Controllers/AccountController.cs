@@ -6,8 +6,10 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace BlogProject.UI.Controllers
+namespace BlogProject.API.Controllers
 {
+    [Route("api/[controller]")] //api/post
+    [ApiController]
     public class AccountController : Controller
     {
         private readonly ICoreService<User> us;
@@ -15,10 +17,10 @@ namespace BlogProject.UI.Controllers
         {
             us = _us;
         }
-        public IActionResult Login()
-        {
-            return View();
-        }
+        //public IActionResult Login()
+        //{
+        //    return View();
+        //}
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> Login(User item)
@@ -36,20 +38,20 @@ namespace BlogProject.UI.Controllers
                     new Claim("Image",logged.ImageURL)
                 };
 
-                var userIdentity = new ClaimsIdentity(claims,"login");
+                var userIdentity = new ClaimsIdentity(claims, "login");
                 ClaimsPrincipal principal = new ClaimsPrincipal(userIdentity);
 
                 await HttpContext.SignInAsync(principal);
 
                 //localhost:PortNo/Adminstrator/Home/Index
-                return Ok();
+                return RedirectToAction("Index", "Home", new { area = "Admin" });
             }
-                return NotFound(item);
+            return View(item);
         }
         public async Task<IActionResult> LogOut()
         {
             await HttpContext.SignOutAsync();
-            return RedirectToAction("Index","Home");
+            return RedirectToAction("Index", "Home");
         }
     }
 }

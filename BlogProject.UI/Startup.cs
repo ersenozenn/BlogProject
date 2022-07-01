@@ -68,6 +68,13 @@ namespace BlogProject.UI
                   pattern: "Adminstrator/{controller=Home}/{action=Index}/{id?}"
                 );
             });
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                  name: "AdminArea",                 
+                  pattern: "api/{controller}/{action}/{id?}"
+                );
+            });
 
             app.UseEndpoints(endpoints =>
             {

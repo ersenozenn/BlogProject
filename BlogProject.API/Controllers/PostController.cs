@@ -3,6 +3,7 @@ using BlogProject.MODEL.Entities;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace BlogProject.API.Controllers
 {
@@ -59,10 +60,12 @@ namespace BlogProject.API.Controllers
         //        return View();
         //    }
         //}
-        //public IActionResult ActivatePost(Guid id)
-        //{
-        //    ps.Activate(id);
-        //    return RedirectToAction("ListPosts");
-        //}
+        [HttpGet]
+        [Route("[action]/{id?}")]
+        public IActionResult ActivatePost(Guid id)
+        {
+            ps.Activate(id);
+            return Redirect("https://localhost:44326/Adminstrator/Post/ListPosts");
+        }
     }
 }
